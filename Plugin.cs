@@ -437,7 +437,7 @@ public class Plugin : BaseUnityPlugin
                                     __instance.scheduler.Schedule(entity.beat, delegate
                                     {
                                         FlipPlayer(__instance, flip, immediate);
-                                        FlipMarchers(__instance, flip);
+                                        Flip(__instance, flip);
                                     });
                                 }
                                 else if (which == 0)
@@ -451,7 +451,7 @@ public class Plugin : BaseUnityPlugin
                                 {
                                     __instance.scheduler.Schedule(entity.beat, delegate
                                     {
-                                        FlipMarchers(__instance, flip);
+                                        Flip(__instance, flip);
                                     });
                                 }
                                 else
@@ -583,29 +583,6 @@ public class Plugin : BaseUnityPlugin
                 }
             }
             return (marchers[index2], index2 < smallMarchers.Length ? smallMarchers[index2] : null);
-        }
-
-        private static void FlipMarchers(GlobeTrottersScript __instance, bool flip)
-        {
-            var topPlanet = __instance.topPlanet;
-            var planet = __instance.planet;
-            var topSmallPlanet = __instance.topSmallPlanet;
-            var smallPlanet = __instance.smallPlanet;
-
-            Animator[] marchers = __instance.npcMarchers;
-            foreach (Animator marcher in marchers)
-            {
-                marcher.transform.parent.SetParent(flip ? topPlanet.transform : planet.transform, worldPositionStays: false);
-                float num = marcher.transform.parent.localEulerAngles.z - (flip ? (0f - planet.TargetZ) : topPlanet.TargetZ);
-                marcher.transform.parent.localEulerAngles = new Vector3(0f, 0f, (flip ? topPlanet.TargetZ : (0f - planet.TargetZ)) + num);
-            }
-            marchers = __instance.smallMarchers;
-            foreach (Animator marcher in marchers)
-            {
-                marcher.transform.parent.SetParent(flip ? topSmallPlanet.transform : smallPlanet.transform, worldPositionStays: false);
-                float num2 = marcher.transform.parent.localEulerAngles.z - (flip ? (0f - smallPlanet.TargetZ) : topSmallPlanet.TargetZ);
-                marcher.transform.parent.localEulerAngles = new Vector3(0f, 0f, (flip ? topSmallPlanet.TargetZ : (0f - smallPlanet.TargetZ)) + num2);
-            }
         }
 
         private static void FlipMarcher(GlobeTrottersScript __instance, bool flip, Animator marcher, Animator smallMarcher)
