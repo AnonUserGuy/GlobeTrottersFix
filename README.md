@@ -1,11 +1,13 @@
 # GlobeTrottersFix
+***Note: The main feature this mod introduces has been incorporated into the base game as of v1.6, making this mod antiquated. Unless you are playing on Bits & Bops v1.5 or below, this mod is unnecessary.***
+
 A simple BepinEx mod for Bits & Bops that "fixes" the flip cue in Globe Trotters to not flip back prematurely. It also adds a bunch of extra events in the mixtape editor for Globe Trotters, mainly to liven up the video I wanted to make demonstrating the mod. 
 
 Demo: https://youtu.be/Gwe0nWNgCxU
 
 ## Installation
 - Install [BepInEx 5.x](https://docs.bepinex.dev/articles/user_guide/installation/index.html) in Bits & Bops.
-- Download `GlobeTrottersFix.dll` from the latest [release](https://github.com/AnonUserGuy/GlobeTrottersFix/releases/), and place it in `BepinEx\plugins\`.
+- Download `GlobeTrottersFix.dll` from the latest [release](https://github.com/AnonUserGuy/GlobeTrottersFix/releases/), and place it in ``<Bits & Bops Installation>/BepinEx/plugins/``.
 
 ## Usage
 ### Custom Mixtapes
@@ -37,3 +39,24 @@ The following mixtape events are added to Globe Trotters and Globe Trotters (Fir
 | `_marcherAnimation`            | <p>`which`</p><p>`animation`</p> | <p>int</p><p>Boolean</p> | <p>Makes the marchers play one of the count in animations.</p> <p>`which` specifies which marcher <ul><li>`-1` for all marchers.</li> <li>`0` for just the player.</li> <li>`1` for just the left NPC marcher.</li> <li>`2` for just the right NPC marcher.</li> </ul></p> <p>`animation` specifies what count in to animation play.<ul> <li>"Bop" plays the bop animation.</li> <li>"Ready" plays the animation leading into stepping.</li> </ul></p> |
 
 **\*Events are already present in the vanilla game, just added to list of events in the mixtape editor.**
+
+## Building 
+### Prequisites
+- Bits & Bops v1.5+
+- Microsoft .NET SDK v4.7.2+
+- Visual Studio 2022 (Optional)
+
+### Steps
+1. Clone this repository using ``git clone https://github.com/AnonUserGuy/GlobeTrottersFix.git``.
+2. Copy ``<Bits & Bops installation>/Bits & Bops_Data/Managed/Assembly-CSharp.dll`` into ``GlobeTrottersFix/lib/``.
+3. Build
+    - Using CLI:
+      ```bash
+      dotnet restore GlobeTrottersFix.sln
+      dotnet build GlobeTrottersFix.sln
+      ```
+    - Using Visual Studio 2022:
+       - Open GlobeTrottersFix.sln with Visual Studio 2022.
+       - Set build mode to "release".
+       - Build project.
+4. Copy ``GlobeTrottersFix/bin/Release/net472/GlobeTrottersFix.dll`` into ``<Bits & Bops Installation>/BepinEx/plugins/``.
